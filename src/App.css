@@ -18,7 +18,7 @@
 .navbar__logo {
   font-weight: 700;
   font-size: 2.2rem;
-  color: #eb0000;
+  color: var(--rose-600);
 }
 .navbar__logo span {
   color: var(--slate-300);
@@ -27,6 +27,10 @@
 
 .navbar__result {
   color: var(--slate-400);
+}
+.navbar__result span {
+  color: var(--rose-600);
+  font-size: 1.2rem;
 }
 
 .navbar .heart {

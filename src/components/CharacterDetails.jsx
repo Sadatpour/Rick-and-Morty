@@ -6,25 +6,27 @@ function CharacterDetails() {
     <div className="" style={{ flex: 1 }}>
       <div className="character-detail">
         <img
-          src={character.image}
-          alt={character.name}
+          src={character[0].image}
+          alt={character[0].name}
           className="character-detail__img"
         />
         <div className="character-detail__info">
           <h3 className="name">
-            <span>{character.gender === "Male" ? "👨‍💼 " : "👩‍⚕️ "}</span>
-            <span> - {character.name}</span>
+            <span>{character[0].gender === "Male" ? "👨‍💼 " : "👩‍⚕️ "}</span>
+            <span> - {character[0].name}</span>
           </h3>
           <div className="info">
             <span
-              className={`status ${character.status === "Dead" ? "red" : ""}`}
+              className={`status ${
+                character[0].status === "Dead" ? "red" : ""
+              }`}
             ></span>
-            <span> {character.status} </span>
-            <span> - {character.species}</span>
+            <span> {character[0].status} </span>
+            <span> - {character[0].species}</span>
           </div>
           <div className="location">
             <p className="">Last known location: </p>
-            <p className="">{character.location.name}</p>
+            <p className="">{character[0].location.name}</p>
           </div>
           <div className="actions">
             <buton className="btn btn--primary">Add to Favorite</buton>
