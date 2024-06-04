@@ -604,7 +604,7 @@ export const character = [
   },
 ];
 
-export const characters = [
+export const allCharacters = [
   {
     id: 1,
     name: "Rick Sanchez",
@@ -641,7 +641,6 @@ export const characters = [
     image: "https://rickandmortyapi.com/api/character/avatar/3.jpeg",
     created: "2017-11-04T19:09:56.428Z",
   },
-
   {
     id: 183,
     name: "Johnny Depp",
