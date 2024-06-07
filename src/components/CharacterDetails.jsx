@@ -6,27 +6,27 @@ function CharacterDetails() {
     <div className="" style={{ flex: 1 }}>
       <div className="character-detail">
         <img
-          src={character[0].image}
-          alt={character[0].name}
+          src={character[3].image}
+          alt={character[3].name}
           className="character-detail__img"
         />
         <div className="character-detail__info">
           <h3 className="name">
-            <span>{character[0].gender === "Male" ? "👨‍💼 " : "👩‍⚕️ "}</span>
-            <span> - {character[0].name}</span>
+            <span>{character[3].gender === "Male" ? "👨‍💼 " : "👩‍⚕️ "}</span>
+            <span> - {character[3].name}</span>
           </h3>
           <div className="info">
             <span
               className={`status ${
-                character[0].status === "Dead" ? "red" : ""
+                character[3].status === "Dead" ? "red" : ""
               }`}
             ></span>
-            <span> {character[0].status} </span>
-            <span> - {character[0].species}</span>
+            <span> {character[3].status} </span>
+            <span> - {character[3].species}</span>
           </div>
           <div className="location">
             <p className="">Last known location: </p>
-            <p className="">{character[0].location.name}</p>
+            <p className="">{character[3].location.name}</p>
           </div>
           <div className="actions">
             <buton className="btn btn--primary">Add to Favorite</buton>
@@ -41,11 +41,11 @@ function CharacterDetails() {
           </button>
         </div>
         <ul>
-          {episodes.map((item, index) => (
+          {episodes.slice(0, 10).map((item, index) => (
             <li key={item.id}>
               <div>
-                {String(index + 1).padStart(2, "0")}-{" "}
-                {item.episode} : <strong>{item.name}</strong>
+                {String(index + 1).padStart(2, "0")}- {item.episode} :{" "}
+                <strong>{item.name}</strong>
               </div>
               <div className="badge badge--secondary">{item.air_date}</div>
             </li>
