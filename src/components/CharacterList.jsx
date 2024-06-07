@@ -1,9 +1,15 @@
-import { EyeIcon } from "@heroicons/react/20/solid";
-function CharacterList({characters}) {
+import { EyeIcon, EyeSlashIcon } from "@heroicons/react/20/solid";
+import { XMarkIcon } from "@heroicons/react/24/outline";
+function CharacterList({ characters, onSelectCharacter, selectedId }) {
   return (
     <div className="characters-list">
       {characters.map(item => (
-        <Character key={item.id} item={item} />
+        <Character
+          selectedId={selectedId}
+          key={item.id}
+          item={item}
+          onSelectCharacter={onSelectCharacter}
+        />
       ))}
     </div>
   );
@@ -11,14 +17,18 @@ function CharacterList({characters}) {
 
 export default CharacterList;
 
-function Character({ item }) {
+function Character({ item, onSelectCharacter, selectedId }) {
   return (
-    <div className="list__item">
+    <div className="list__item" onClick={() => onSelectCharacter(item.id)}>
       <img src={item.image} alt={item.name} />
       <CharacterName item={item} />
       <CharacterInfo item={item} />
       <button className="red icon">
-        <EyeIcon />
+        {selectedId === item.id ? (
+          <XMarkIcon style={{ color: "white" }} />
+        ) : (
+          <EyeIcon />
+        )}
       </button>
     </div>
   );

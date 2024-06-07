@@ -8,6 +8,7 @@ import axios from "axios";
 function App() {
   const [characters, setCharacters] = useState([]);
   const [query, setQuery] = useState("");
+  const [selectedId, setSelectedId] = useState(null);
 
   useEffect(() => {
     async function fetchData() {
@@ -15,7 +16,7 @@ function App() {
         const { data } = await axios.get(
           `https://rickandmortyapi.com/api/character/?name=${query}`
         );
-        setCharacters(data.results.slice(0,7));
+        setCharacters(data.results.slice(0, 7));
       } catch (error) {
         setCharacters([]);
         // alert(error.response.data.error);
@@ -23,7 +24,9 @@ function App() {
     }
     fetchData();
   }, [query]);
-
+  const onHandleSelectCharacter = id => {
+    setSelectedId(id);
+  };
   return (
     <div className="app">
       <Navbar>
@@ -31,8 +34,12 @@ function App() {
         <SearchResult numOfResult={characters.length} />
       </Navbar>
       <div className="main">
-        <CharacterList characters={characters} />
-        <CharacterDetails />
+        <CharacterList
+        selectedId={selectedId}
+          characters={characters}
+          onSelectCharacter={onHandleSelectCharacter}
+        />
+        <CharacterDetails selectedId={selectedId} />
       </div>
     </div>
   );
