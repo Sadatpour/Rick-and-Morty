@@ -84,15 +84,20 @@ function CharacterDetails({ selectedId, onAddFavourit, isAddToFavourit }) {
           </button>
         </div>
         <ul>
-          {episodes.map((item, index) => (
-            <li key={item.id}>
-              <div>
-                {String(index + 1).padStart(2, "0")}- {item.episode} :{" "}
-                <strong>{item.name}</strong>
-              </div>
-              <div className="badge badge--secondary">{item.air_date}</div>
-            </li>
-          ))}
+          {episodes
+            .map((item, index) => (
+              <li key={item.id}>
+                <div>
+                  {String(index + 1).padStart(2, "0")}-{item.episode} :{" "}
+                  <strong>{item.name}</strong>
+                </div>
+                <div className="badge badge--secondary">{item.air_date}</div>
+              </li>
+            ))
+            .slice(0, 12)}{" "}
+          <p className="text-field__p">
+            Maximum Episodes to Show : 12 episodes
+          </p>
         </ul>
       </div>
     </div>

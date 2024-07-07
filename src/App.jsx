@@ -31,13 +31,19 @@ function App() {
   const handleAddFavourite = char => {
     setfavourite([...favourite, char]);
   };
+  const handleDeleteFavourite = id => {
+    setfavourite(prevFav => prevFav.filter(fav => fav.id !== id));
+  };
   const isAddToFavourit = favourite.map(fav => fav.id).includes(selectedId);
   return (
     <div className="app">
       <Navbar>
         <Search query={query} setQuery={setQuery} />
         <SearchResult numOfResult={characters.length} />
-        <Favourite numOfFavourite={favourite.length} />
+        <Favourite
+          favourite={favourite}
+          onDeleteFavourite={handleDeleteFavourite}
+        />
       </Navbar>
       <div className="main">
         <CharacterList
