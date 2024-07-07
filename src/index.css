@@ -44,6 +44,11 @@ button {
 .text-field::placeholder {
   color: var(--slate-400);
 }
+.text-field__p {
+  color: var(--slate-400);
+  font-size: 1rem;
+  margin: 10px 0;
+}
 
 .btn {
   padding: 0.8rem 1rem;
@@ -78,7 +83,7 @@ button {
   width: 98%;
   min-height: 250px;
   position: absolute;
-  top: 50%;
+  top: 30%;
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: var(--slate-900);
