@@ -3,6 +3,7 @@ import { episodes } from "../../data/data";
 import { useEffect, useState } from "react";
 import { EyeIcon } from "@heroicons/react/20/solid";
 import axios from "axios";
+import { FilmIcon } from "@heroicons/react/24/outline";
 
 function CharacterDetails({ selectedId }) {
   const [character, setCharacter] = useState(null);
@@ -64,7 +65,7 @@ function CharacterDetails({ selectedId }) {
         <div className="title">
           <h2>List of Episodes: </h2>
           <button>
-            <ArrowUpCircleIcon className="icon" />
+            <FilmIcon className="icon" />
           </button>
         </div>
         <ul>
