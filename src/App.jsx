@@ -2,13 +2,14 @@ import { useState, useEffect } from "react";
 import "./App.css";
 import CharacterDetails from "./components/CharacterDetails";
 import CharacterList from "./components/CharacterList";
-import Navbar, { SearchResult, Search } from "./components/Navbar";
+import Navbar, { SearchResult, Search, Favourite } from "./components/Navbar";
 import axios from "axios";
 
 function App() {
   const [characters, setCharacters] = useState([]);
   const [query, setQuery] = useState("");
   const [selectedId, setSelectedId] = useState(null);
+  const [favourite, setfavourite] = useState([]);
 
   useEffect(() => {
     async function fetchData() {
@@ -24,22 +25,31 @@ function App() {
     }
     fetchData();
   }, [query]);
-  const onHandleSelectCharacter = id => {
+  const handleSelectCharacter = id => {
     setSelectedId(id);
   };
+  const handleAddFavourite = char => {
+    setfavourite([...favourite, char]);
+  };
+  const isAddToFavourit = favourite.map(fav => fav.id).includes(selectedId);
   return (
     <div className="app">
       <Navbar>
         <Search query={query} setQuery={setQuery} />
         <SearchResult numOfResult={characters.length} />
+        <Favourite numOfFavourite={favourite.length} />
       </Navbar>
       <div className="main">
         <CharacterList
-        selectedId={selectedId}
+          selectedId={selectedId}
           characters={characters}
-          onSelectCharacter={onHandleSelectCharacter}
+          onSelectCharacter={handleSelectCharacter}
         />
-        <CharacterDetails selectedId={selectedId} />
+        <CharacterDetails
+          selectedId={selectedId}
+          onAddFavourit={handleAddFavourite}
+          isAddToFavourit={isAddToFavourit}
+        />
       </div>
     </div>
   );
