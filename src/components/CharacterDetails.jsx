@@ -1,11 +1,11 @@
 import { ArrowUpCircleIcon } from "@heroicons/react/20/solid";
-import { episodes } from "../../data/data";
 import { useEffect, useState } from "react";
 import { EyeIcon } from "@heroicons/react/20/solid";
 import axios from "axios";
 
-function CharacterDetails({ selectedId }) {
+function CharacterDetails({ selectedId, onAddFavourit, isAddToFavourit }) {
   const [character, setCharacter] = useState(null);
+  const [episodes, setEpisodes] = useState([]);
 
   useEffect(() => {
     async function fetchData() {
@@ -13,6 +13,12 @@ function CharacterDetails({ selectedId }) {
         `https://rickandmortyapi.com/api/character/${selectedId}`
       );
       setCharacter(data);
+
+      const episodesId = data.episode.map(e => e.split("/").at(-1));
+      const { data: episodeData } = await axios.get(
+        `https://rickandmortyapi.com/api/episode/${episodesId}`
+      );
+      setEpisodes([episodeData].flat());
     }
     if (selectedId) fetchData();
   }, [selectedId]);
@@ -56,7 +62,16 @@ function CharacterDetails({ selectedId }) {
             <p className="">{character.location.name}</p>
           </div>
           <div className="actions">
-            <buton className="btn btn--primary">Add to Favorite</buton>
+            {isAddToFavourit ? (
+              <p>Character Added ✔️ </p>
+            ) : (
+              <button
+                onClick={() => onAddFavourit(character)}
+                className="btn btn--primary"
+              >
+                Add to Favorite
+              </button>
+            )}
           </div>
         </div>
       </div>
@@ -68,7 +83,7 @@ function CharacterDetails({ selectedId }) {
           </button>
         </div>
         <ul>
-          {episodes.slice(0, 10).map((item, index) => (
+          {episodes.map((item, index) => (
             <li key={item.id}>
               <div>
                 {String(index + 1).padStart(2, "0")}- {item.episode} :{" "}
